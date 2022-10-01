@@ -11,7 +11,7 @@ def best_move(board, depth):
         if not board.turn:
             score *= -1
 
-        if score > best_score:
+        if score >= best_score:
             best_score = score
             best_move = move
     return best_move
