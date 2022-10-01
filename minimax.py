@@ -1,8 +1,9 @@
 from evaluate import evaluate
+from search_captures import search_captures
 
 def minimax(board, depth, alpha, beta, maximizingPlayer):
     if depth == 0 or board.is_game_over():
-        return evaluate(board)
+        return search_captures(board, alpha, beta)
     if maximizingPlayer:
         maxEval = -9999
         for move in board.legal_moves:

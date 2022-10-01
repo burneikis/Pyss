@@ -10,9 +10,9 @@ def game(depth):
         print(board)
         position = evaluate(board)
         if board.turn:
-            print(f'White to move, Position: {position}')
+            print(f'White to move, Eval: {position/100}')
         else:
-            print(f'Black to move, Position: {position}')
+            print(f'Black to move, Eval: {position/100}')
 
         move = best_move(board, depth)
         print(str(move))
