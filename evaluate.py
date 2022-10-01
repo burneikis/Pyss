@@ -47,9 +47,9 @@ def evaluate(board):
     for square in center_squares:
         if board.piece_at(square):
             if board.piece_at(square).color == chess.WHITE:
-                center_control += 1
+                center_control += 10
             else:
-                center_control -= 1
+                center_control -= 10
 
 
-    return material + mobility
+    return material + mobility + center_control
