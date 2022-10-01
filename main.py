@@ -16,7 +16,7 @@ def game(depth):
 
         move = best_move(board, depth)
         board.push(move)
-
+        print(str(move))
         played_moves.append(str(move))
 
     print(board)
