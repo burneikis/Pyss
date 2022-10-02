@@ -5,7 +5,7 @@ def best_move(board, depth):
     best_score = -9999
     for move in board.legal_moves:
         board.push(move)
-        score = minimax(board, depth - 1, -9999, 9999, board.turn)
+        score = minimax(board, depth - 1, -9999, 9999)
         board.pop()
 
         if not board.turn:
