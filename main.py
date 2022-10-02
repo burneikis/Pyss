@@ -1,11 +1,12 @@
 from get_move import best_move
 from evaluate import evaluate
 import chess
-
-board = chess.Board()
+import chess.pgn
 
 def game(depth):
-    played_moves = []
+    board = chess.Board()
+    game = chess.pgn.Game()
+    node = game
     while not board.is_game_over():
         print(board)
         position = evaluate(board)
@@ -17,10 +18,11 @@ def game(depth):
         move = best_move(board, depth)
         print(str(move))
         board.push(move)
-        played_moves.append(str(move))
+
+        node = node.add_variation(move)
 
     print(board)
-    print(played_moves)
+    print(game)
     print(f'Game over, {board.result()}')
 
 game(2)
