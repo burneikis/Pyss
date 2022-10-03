@@ -29,10 +29,13 @@ def game(depth):
         else:
             print(f'Black to move, Eval: {position/100}')
 
-        if board.turn:
-            move = get_player_move(board)
-        else:
-            move = best_move(board, depth)
+        # Player plays white
+        # if board.turn:
+        #     move = get_player_move(board)
+        # else:
+        #     move = best_move(board, depth)
+
+        move = best_move(board, depth)
         
         print(str(move))
         board.push(move)
