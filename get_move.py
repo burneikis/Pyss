@@ -13,5 +13,5 @@ def best_move(board, depth):
 
         if score >= best_score:
             best_score = score
-            best_move = move
+            best_move = move      
     return best_move

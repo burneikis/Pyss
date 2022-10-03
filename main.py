@@ -1,5 +1,6 @@
 from get_move import best_move
 from evaluate import evaluate
+from transposition import transpositions
 import chess
 import chess.pgn
 
@@ -22,6 +23,8 @@ def game(depth):
     node = game
 
     while not board.is_game_over():
+        transpositions.clear()
+
         print(board)
         position = evaluate(board)
         if board.turn:
@@ -39,7 +42,6 @@ def game(depth):
         
         print(str(move))
         board.push(move)
-
         node = node.add_variation(move)
 
     game.headers["Result"] = board.result()
@@ -47,4 +49,4 @@ def game(depth):
     print(board)
     print(game)
 
-game(6)
+game(2)
