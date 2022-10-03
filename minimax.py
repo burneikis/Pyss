@@ -1,6 +1,6 @@
 from evaluate import evaluate
 from search_captures import search_captures
-from transposition import add_transposition, get_transposition, transpositions
+from transposition import add_transposition, get_transposition
 
 def minimax(board, depth, alpha, beta):
     try:
