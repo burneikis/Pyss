@@ -3,6 +3,16 @@ from evaluate import evaluate
 import chess
 import chess.pgn
 
+def get_player_move(board):
+    while True:
+        move = input('Enter move: ')
+        try:
+            move = board.parse_san(move)
+            if move in board.legal_moves:
+                return move
+        except:
+            pass
+
 def game(depth):
     board = chess.Board()
 
@@ -19,7 +29,11 @@ def game(depth):
         else:
             print(f'Black to move, Eval: {position/100}')
 
-        move = best_move(board, depth)
+        if board.turn:
+            move = get_player_move(board)
+        else:
+            move = best_move(board, depth)
+        
         print(str(move))
         board.push(move)
 
