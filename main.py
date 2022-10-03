@@ -26,11 +26,10 @@ def game(depth):
         transpositions.clear()
 
         print(board)
-        position = evaluate(board)
         if board.turn:
-            print(f'White to move, CurPosEval: {position/100}')
+            print("White to move")
         else:
-            print(f'Black to move, CurPosEval: {position/100}')
+            print("Black to move")
 
         # Player plays white
         # if board.turn:
@@ -49,4 +48,4 @@ def game(depth):
     print(board)
     print(game)
 
-game(4)
+game(2)
