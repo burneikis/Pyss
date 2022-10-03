@@ -5,8 +5,12 @@ import chess.pgn
 
 def game(depth):
     board = chess.Board()
+
     game = chess.pgn.Game()
+    game.headers["White"] = "White"
+    game.headers["Black"] = "Black"
     node = game
+
     while not board.is_game_over():
         print(board)
         position = evaluate(board)
@@ -21,8 +25,9 @@ def game(depth):
 
         node = node.add_variation(move)
 
+    game.headers["Result"] = board.result()
+
     print(board)
     print(game)
-    print(f'Game over, {board.result()}')
 
-game(2)
+game(4)
