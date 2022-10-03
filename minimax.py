@@ -2,21 +2,23 @@ from evaluate import evaluate
 from search_captures import search_captures
 from transposition import add_transposition, get_transposition
 
-def minimax(board, depth, alpha, beta):
+def minimax(board, depth, alpha, beta, how_deep):
     try:
-        return get_transposition(board)
+        transposition = get_transposition(board, depth)
+        if transposition[1] >= depth:
+            return transposition[0]
     except:
         pass
 
     if depth == 0 or board.is_game_over():
         evaluation = evaluate(board)
-        add_transposition(board, evaluation)
+        add_transposition(board, evaluation, how_deep)
         return evaluation
     if board.turn:
         maxEval = -9999
         for move in board.legal_moves:
             board.push(move)
-            eval = minimax(board, depth - 1, alpha, beta)
+            eval = minimax(board, depth - 1, alpha, beta, how_deep + 1)
             board.pop()
             maxEval = max(maxEval, eval)
             alpha = max(alpha, eval)
@@ -27,7 +29,7 @@ def minimax(board, depth, alpha, beta):
         minEval = 9999
         for move in board.legal_moves:
             board.push(move)
-            eval = minimax(board, depth - 1, alpha, beta)
+            eval = minimax(board, depth - 1, alpha, beta, how_deep + 1)
             board.pop()
             minEval = min(minEval, eval)
             beta = min(beta, eval)

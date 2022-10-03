@@ -1,4 +1,5 @@
 import random
+import chess
 
 global transpositions
 
@@ -11,13 +12,17 @@ zobrist_table = [
 def zobrist_hash(board):
     hash = 0
     for square in range(64):
-        piece = board.piece_type_at(square)
-        if piece:
-            hash ^= zobrist_table[piece - 1][square]
+        piece = board.piece_at(square)
+        pieceType = board.piece_type_at(square)
+        if pieceType:
+            if piece.color == chess.WHITE:
+                hash ^= zobrist_table[pieceType - 1][square]
+            else:
+                hash ^= zobrist_table[pieceType + 5][square]
     return hash
 
-def add_transposition(board, score):
-    transpositions[zobrist_hash(board)] = score
+def add_transposition(board, score, depth):
+    transpositions[zobrist_hash(board)] = [score, depth]
 
 def get_transposition(board):
     return transpositions[zobrist_hash(board)]

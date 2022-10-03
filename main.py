@@ -49,4 +49,4 @@ def game(depth):
     print(board)
     print(game)
 
-game(6)
+game(4)
