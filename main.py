@@ -28,9 +28,9 @@ def game(depth):
         print(board)
         position = evaluate(board)
         if board.turn:
-            print(f'White to move, Eval: {position/100}')
+            print(f'White to move, CurPosEval: {position/100}')
         else:
-            print(f'Black to move, Eval: {position/100}')
+            print(f'Black to move, CurPosEval: {position/100}')
 
         # Player plays white
         # if board.turn:
@@ -40,8 +40,8 @@ def game(depth):
 
         move = best_move(board, depth)
         
-        print(str(move))
-        board.push(move)
+        print(f'{move[0]}: {move[1]/100}')
+        board.push(move[0])
         node = node.add_variation(move)
 
     game.headers["Result"] = board.result()
