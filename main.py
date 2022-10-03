@@ -42,7 +42,7 @@ def game(depth):
         
         print(f'{move[0]}: {move[1]/100}')
         board.push(move[0])
-        node = node.add_variation(move)
+        node = node.add_variation(move[0])
 
     game.headers["Result"] = board.result()
 
