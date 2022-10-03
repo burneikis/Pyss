@@ -1,16 +1,16 @@
 from evaluate import evaluate
 from search_captures import search_captures
-from transposition import transpositions
+from transposition import add_transposition, get_transposition, transpositions
 
 def minimax(board, depth, alpha, beta):
     try:
-        return transpositions[board.fen()]
+        return get_transposition(board)
     except:
         pass
 
     if depth == 0 or board.is_game_over():
         evaluation = evaluate(board)
-        transpositions[board.fen()] = evaluation
+        add_transposition(board, evaluation)
         return evaluation
     if board.turn:
         maxEval = -9999
