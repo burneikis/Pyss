@@ -5,13 +5,13 @@ from transposition import add_transposition, get_transposition
 def minimax(board, depth, alpha, beta, how_deep):
     try:
         transposition = get_transposition(board, depth)
-        if transposition[1] >= depth:
+        if transposition[1] >= how_deep:
             return transposition[0]
     except:
         pass
 
     if depth == 0 or board.is_game_over():
-        evaluation = minimax_cap(board, alpha, beta)
+        evaluation = minimax_cap(board, alpha, beta, how_deep)
         add_transposition(board, evaluation, how_deep)
         return evaluation
     if board.turn:
