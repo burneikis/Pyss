@@ -1,5 +1,5 @@
 from evaluate import evaluate
-from search_captures import minimax_cap
+from search_captures import search_captures
 from transposition import add_transposition, get_transposition
 
 def minimax(board, depth, alpha, beta, how_deep):
@@ -11,7 +11,7 @@ def minimax(board, depth, alpha, beta, how_deep):
         pass
 
     if depth == 0 or board.is_game_over():
-        evaluation = evaluate(board)
+        evaluation = search_captures(board, alpha, beta)
         add_transposition(board, evaluation, how_deep)
         return evaluation
 
