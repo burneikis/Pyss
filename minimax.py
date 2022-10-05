@@ -1,4 +1,5 @@
 from evaluate import evaluate
+from quiescence import quiescence
 from transposition_table import add_transposition, get_transposition
 
 def minimax(board, depth, alpha, beta):
@@ -10,7 +11,7 @@ def minimax(board, depth, alpha, beta):
         pass
 
     if depth == 0 or board.is_game_over():
-        eval = evaluate(board)
+        eval = quiescence(board, alpha, beta)
         add_transposition(board, eval, depth)
         return eval
 
