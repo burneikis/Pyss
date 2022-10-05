@@ -1,6 +1,6 @@
 from minimax import minimax
 
-def best_move(board, depth):
+def get_move(board, depth):
     best_move = None
     best_score = -9999
 
@@ -8,8 +8,6 @@ def best_move(board, depth):
         board.push(move)
         score = minimax(board, depth - 1, -9999, 9999)
         board.pop()
-        
-        print(f"{move}: {score}")
 
         if not board.turn:
             score *= -1
@@ -18,4 +16,4 @@ def best_move(board, depth):
             best_score = score
             best_move = move     
          
-    return best_move, best_score
+    return best_move

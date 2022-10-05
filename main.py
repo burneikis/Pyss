@@ -1,4 +1,4 @@
-from get_move import best_move
+from get_move import get_move
 import chess
 import chess.pgn
 
@@ -9,21 +9,12 @@ def game(depth):
     node = game
 
     while not board.is_game_over():
-        print(board)
-        if board.turn:
-            print("White to move")
-        else:
-            print("Black to move")
+        move = get_move(board, depth)
+        board.push(move)
+        node = node.add_variation(move)
 
-        move = best_move(board, depth)
-        
-        print(f'{move[0]}: {move[1]/100}')
-        board.push(move[0])
-        node = node.add_variation(move[0])
-
-        game.headers["Result"] = board.result()
-
-    print(board)
+    game.headers["Result"] = board.result()
     print(game)
 
-game(2)
+if __name__ == '__main__':
+    game(2)

@@ -5,24 +5,24 @@ def minimax(board, depth, alpha, beta):
         return evaluate(board)
 
     if board.turn:
-        maxEval = -9999
+        max_eval = -9999
         for move in board.legal_moves:
             board.push(move)
             eval = minimax(board, depth - 1, alpha, beta)
             board.pop()
-            maxEval = max(maxEval, eval)
+            max_eval = max(max_eval, eval)
             alpha = max(alpha, eval)
             if beta <= alpha:
                 break
-        return maxEval
+        return max_eval
     else:
-        minEval = 9999
+        min_eval = 9999
         for move in board.legal_moves:
             board.push(move)
             eval = minimax(board, depth - 1, alpha, beta)
             board.pop()
-            minEval = min(minEval, eval)
+            min_eval = min(min_eval, eval)
             beta = min(beta, eval)
             if beta <= alpha:
                 break
-        return minEval
+        return min_eval
