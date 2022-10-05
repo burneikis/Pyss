@@ -1,5 +1,5 @@
 # Python Chess AI
 A Simple AI for chess written in python.
 
-## This article was helpful for threading
-https://superfastpython.com/thread-return-values/
+## Thoughts
+Python is slow, my code is slow, I need a compsci degree.
