@@ -1,12 +1,23 @@
 import chess
 
+values = {
+    chess.PAWN: 100,
+    chess.KNIGHT: 320,
+    chess.BISHOP: 330,
+    chess.ROOK: 500,
+    chess.QUEEN: 900,
+    chess.KING: 20000
+}
+
+center_squares = [
+    chess.D5, chess.E5,
+    chess.D4, chess.E4
+]
+
 def evaluate(board):
     # Checkmate/stalemate
     if board.is_checkmate():
-        if board.turn:
-            return -9999
-        else:
-            return 9999
+        return -9999 if board.turn else 9999
 
     if board.is_stalemate():
         return 0
@@ -15,24 +26,8 @@ def evaluate(board):
     material = 0
     for piece in board.piece_map().values():
         #get piece value
-        if piece.piece_type == chess.PAWN:
-            value = 100
-        elif piece.piece_type == chess.KNIGHT:
-            value = 320
-        elif piece.piece_type == chess.BISHOP:
-            value = 330
-        elif piece.piece_type == chess.ROOK:
-            value = 500
-        elif piece.piece_type == chess.QUEEN:
-            value = 900
-        elif piece.piece_type == chess.KING:
-            value = 20000
-
-        #get piece color
-        if piece.color == chess.WHITE:
-            material += value
-        else:
-            material -= value
+        value = values[piece.piece_type]
+        material += value if piece.color else -value
 
     # Mobility
     mobility = 0
@@ -43,13 +38,9 @@ def evaluate(board):
 
     # Center control
     center_control = 0
-    center_squares = [chess.D4, chess.E4, chess.D5, chess.E5]
     for square in center_squares:
         if board.piece_at(square):
-            if board.piece_at(square).color == chess.WHITE:
-                center_control += 10
-            else:
-                center_control -= 10
+            center_control += 10 if board.piece_at(square).color else -10
 
 
     return material + mobility + center_control
