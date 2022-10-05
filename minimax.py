@@ -1,8 +1,18 @@
 from evaluate import evaluate
+from transposition_table import add_transposition, get_transposition
 
 def minimax(board, depth, alpha, beta):
+    try:
+        transposition = get_transposition(board)
+        if transposition[1] >= depth:
+            return transposition[0]
+    except:
+        pass
+
     if depth == 0 or board.is_game_over():
-        return evaluate(board)
+        eval = evaluate(board)
+        add_transposition(board, eval, depth)
+        return eval
 
     if board.turn:
         max_eval = -9999
