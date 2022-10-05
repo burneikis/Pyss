@@ -2,6 +2,15 @@ from get_move import get_move
 import chess
 import chess.pgn
 
+def get_player_move(board):
+    while True:
+        move = input("Enter move: ")
+        try:
+            move = board.parse_san(move)
+            return move
+        except:
+            print("Invalid move")
+
 def game(depth):
     board = chess.Board()
 
@@ -9,7 +18,12 @@ def game(depth):
     node = game
 
     while not board.is_game_over():
-        move = get_move(board, depth)
+        print(board)
+
+        move = get_move(board, depth) #if board.turn else get_player_move(board)
+
+        print(str(move))
+
         board.push(move)
         node = node.add_variation(move)
 
