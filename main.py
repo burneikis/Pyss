@@ -19,7 +19,7 @@ def game(depth):
     node = game
 
     while not board.is_game_over():
-        transposition_table.clear()
+        # transposition_table.clear()
 
         print(board)
 
