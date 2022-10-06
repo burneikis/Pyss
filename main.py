@@ -36,4 +36,4 @@ def game(depth):
     print(game)
 
 if __name__ == '__main__':
-    game(6)
+    game(2)

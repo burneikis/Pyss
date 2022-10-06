@@ -10,8 +10,11 @@ def minimax(board, depth, alpha, beta):
     except:
         pass
 
-    if depth == 0 or board.is_game_over():
+    if board.is_game_over():
         return evaluate(board)
+
+    if depth == 0:
+        return quiescence(board, alpha, beta, board.turn)
 
     if board.turn:
         max_eval = -9999

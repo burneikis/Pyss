@@ -1,48 +1,42 @@
 from evaluate import evaluate
 
-'''
-Pseudocode from https://www.chessprogramming.org/Quiescence_Search
-int Quiesce( int alpha, int beta ) {
-    int stand_pat = Evaluate();
-    if( stand_pat >= beta )
-        return beta;
-    if( alpha < stand_pat )
-        alpha = stand_pat;
+def quiescence(board, alpha, beta, max_player): 
+    captures = [i for i in board.legal_moves if board.is_capture(i)]
 
-    until( every_capture_has_been_examined )  {
-        MakeCapture();
-        score = -Quiesce( -beta, -alpha );
-        TakeBackMove();
-
-        if( score >= beta )
-            return beta;
-        if( score > alpha )
-           alpha = score;
-    }
-    return alpha;
-}
-'''
-
-def quiescence(board, alpha, beta): 
     stand_pat = evaluate(board)
-    if not board.turn:
-        stand_pat *= -1
-        
-    if stand_pat >= beta:
-        return beta
-    if alpha < stand_pat:
-        alpha = stand_pat
 
-    for move in board.legal_moves:
-        if not board.is_capture(move):
-            continue
-        board.push(move)
-        score = -quiescence(board, -beta, -alpha)
-        board.pop()
-
-        if score >= beta:
+    if max_player:
+        if stand_pat >= beta:
             return beta
-        if score > alpha:
-            alpha = score
+        if alpha < stand_pat:
+            alpha = stand_pat
 
-    return alpha
+        for move in captures:
+            board.push(move)
+            score = quiescence(board, alpha, beta, False)
+            board.pop()
+
+            if score >= beta:
+                return beta
+            if score > alpha:
+                alpha = score
+
+        return alpha
+
+    else:
+        if stand_pat <= alpha:
+            return alpha
+        if beta > stand_pat:
+            beta = stand_pat
+
+        for move in captures:
+            board.push(move)
+            score = quiescence(board, alpha, beta, True)
+            board.pop()
+
+            if score <= alpha:
+                return alpha
+            if score < beta:
+                beta = score
+
+        return beta
