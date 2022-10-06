@@ -20,6 +20,7 @@ def game(depth):
 
     while not board.is_game_over():
         transposition_table.clear()
+
         print(board)
 
         move = get_move(board, depth) #if board.turn else get_player_move(board)
