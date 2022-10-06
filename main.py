@@ -37,4 +37,4 @@ def game(depth):
     print(game)
 
 if __name__ == '__main__':
-    print(timeit.timeit("game(4)", setup="from __main__ import game", number=1))
+    print(timeit.timeit("game(3)", setup="from __main__ import game", number=1))
