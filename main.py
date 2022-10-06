@@ -2,6 +2,7 @@ from get_move import get_move
 import chess
 import chess.pgn
 import timeit
+from transposition_table import transposition_table
 
 def get_player_move(board):
     while True:
@@ -19,6 +20,7 @@ def game(depth):
     node = game
 
     while not board.is_game_over():
+        transposition_table.clear()
         print(board)
 
         move = get_move(board, depth) #if board.turn else get_player_move(board)
