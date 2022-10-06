@@ -30,6 +30,7 @@ def game(depth):
         board.push(move)
         node = node.add_variation(move)
 
+    print(board)
     game.headers["White"] = "Computer"
     game.headers["Black"] = "Computer"
     game.headers["Result"] = board.result()
