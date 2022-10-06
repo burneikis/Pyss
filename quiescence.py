@@ -25,7 +25,9 @@ int Quiesce( int alpha, int beta ) {
 
 def quiescence(board, alpha, beta): 
     stand_pat = evaluate(board)
-    
+    if not board.turn:
+        stand_pat *= -1
+        
     if stand_pat >= beta:
         return beta
     if alpha < stand_pat:
