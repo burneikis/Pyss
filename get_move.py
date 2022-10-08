@@ -30,8 +30,6 @@ def get_move(board, depth):
     for p in range(len(processes)):
         move, score = q.get()
 
-        print(f'{move}: {score}')
-
         if not board.turn:
             score *= -1
         
@@ -41,8 +39,6 @@ def get_move(board, depth):
 
         # this is so its deterministic
         elif score == best_score and str(move) < str(best_move):
-            print("cum")
             best_move = move
 
-    print(f'Best move: {best_move} with score {best_score}')
     return best_move
