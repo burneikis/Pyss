@@ -1,8 +1,8 @@
 from get_move import get_move
 import chess
 import chess.pgn
-from transposition_table import transposition_table
 import timeit
+from minimax import transpositions_found
 
 def get_player_move(board):
     while True:
@@ -22,14 +22,12 @@ def game(depth):
     node = pgn
 
     while not board.is_game_over():
-        transposition_table.clear()
-
         print(board)
 
         move = get_move(board, depth) #if board.turn else get_player_move(board)
 
         print(str(move))
-
+        print(transpositions_found)
         board.push(move)
         
         node = node.add_variation(move)
