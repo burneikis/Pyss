@@ -22,14 +22,15 @@ def game(depth):
 
     while not board.is_game_over():
         print(board)
+        print("White to move" if board.turn else "Black to move")
 
         move = get_move(board, depth) #if board.turn else get_player_move(board)
-
-        print(str(move))
-
         board.push(move)
         
         node = node.add_variation(move)
+
+        #print the last move from the pgn
+        print(str(pgn).split()[-2])
 
     print(board)
     pgn.headers["White"] = "Computer"
