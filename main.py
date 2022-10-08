@@ -2,6 +2,7 @@ from get_move import get_move
 import chess
 import chess.pgn
 from transposition_table import transposition_table
+import timeit
 
 def get_player_move(board):
     while True:
@@ -37,4 +38,4 @@ def game(depth):
     print(game)
 
 if __name__ == '__main__':
-    game(2)
+    print(timeit.timeit("game(2)", setup="from __main__ import game", number=1))

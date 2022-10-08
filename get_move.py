@@ -1,37 +1,40 @@
 from minimax import minimax
-import threading
+import multiprocess as mp
+
+def thread_function(board, depth, move, queue):
+    board.push(move)
+    score = minimax(board, depth - 1, -9999, 9999)
+    board.pop()
+
+    queue.put((move, score))
 
 def get_move(board, depth):
     best_move = None
     best_score = -9999
 
-    def thread_function(board, depth, move):
-        board.push(move)
-        score = minimax(board, depth - 1, -9999, 9999)
-        board.pop()
-
-        if not board.turn:
-            score *= -1
-
-        nonlocal best_score
-        nonlocal best_move
-
-        if score >= best_score:
-            best_score = score
-            best_move = move
-
-    threads = []
+    processes = []
+    q = mp.Queue()
 
     for move in board.legal_moves:
         board_copy = board.copy()
 
-        t = threading.Thread(target=thread_function, args=(board_copy, depth, move))
-        threads.append(t)
+        p = mp.Process(target=thread_function, args=(board_copy, depth, move, q))
+        processes.append(p)
 
-    for thread in threads:
-        thread.start()
+    for p in processes:
+        p.start()
 
-    for thread in threads:
-        thread.join()
-         
+    for p in processes:
+        p.join()
+
+    for move in board.legal_moves:
+        move, score = q.get()
+
+        if not board.turn:
+            score *= -1
+        
+        if score >= best_score:
+            best_score = score
+            best_move = move
+
     return best_move
