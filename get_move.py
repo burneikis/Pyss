@@ -10,7 +10,7 @@ def thread_function(board, depth, move, queue):
 
 def get_move(board, depth):
     best_move = None
-    best_score = -9999
+    best_score = float("-inf")
 
     processes = []
     q = mp.Queue()
@@ -30,6 +30,8 @@ def get_move(board, depth):
     for p in range(len(processes)):
         move, score = q.get()
 
+        print(f'{move}: {score}')
+
         if not board.turn:
             score *= -1
         
@@ -42,4 +44,5 @@ def get_move(board, depth):
             print("cum")
             best_move = move
 
+    print(f'Best move: {best_move} with score {best_score}')
     return best_move

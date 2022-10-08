@@ -16,8 +16,10 @@ def get_player_move(board):
 def game(depth):
     board = chess.Board()
 
-    game = chess.pgn.Game()
-    node = game
+    board.set_board_fen("2r5/1Q6/1kp1n3/2N1P3/p4p2/3B4/PP4PP/2R1K2R")
+
+    pgn = chess.pgn.Game()
+    node = pgn
 
     while not board.is_game_over():
         # transposition_table.clear()
@@ -29,13 +31,14 @@ def game(depth):
         print(str(move))
 
         board.push(move)
+        
         node = node.add_variation(move)
 
     print(board)
-    game.headers["White"] = "Computer"
-    game.headers["Black"] = "Computer"
-    game.headers["Result"] = board.result()
-    print(game)
+    pgn.headers["White"] = "Computer"
+    pgn.headers["Black"] = "Computer"
+    pgn.headers["Result"] = board.result()
+    print(pgn)
 
 if __name__ == '__main__':
     print(timeit.timeit("game(4)", setup="from __main__ import game", number=1))
