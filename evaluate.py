@@ -10,10 +10,10 @@ values = {
     chess.KING: 20000
 }
 
-# center_squares = [
-#     chess.D5, chess.E5,
-#     chess.D4, chess.E4
-# ]
+center_squares = [
+    chess.D5, chess.E5,
+    chess.D4, chess.E4
+]
 
 def evaluate(board):
     # Checkmate/stalemate
@@ -31,17 +31,17 @@ def evaluate(board):
         material += value if piece.color else -value
 
     # Mobility
-    # mobility = 0
-    # mobility += len(list(board.legal_moves))
-    # board.push(chess.Move.null())
-    # mobility -= len(list(board.legal_moves))
-    # board.pop()
+    mobility = 0
+    mobility += len(list(board.legal_moves))
+    board.push(chess.Move.null())
+    mobility -= len(list(board.legal_moves))
+    board.pop()
 
     # Center control
-    # center_control = 0
-    # for square in center_squares:
-    #     if board.piece_at(square):
-    #         center_control += 10 if board.piece_at(square).color else -10
+    center_control = 0
+    for square in center_squares:
+        if board.piece_at(square):
+            center_control += 10 if board.piece_at(square).color else -10
 
     # Table Value
     # this is very slow
@@ -51,4 +51,4 @@ def evaluate(board):
     #     piece_type = board.piece_at(piece).piece_type
     #     table_value += piece_square_tables[piece_type][piece] if white else -piece_square_tables[piece_type][piece]
 
-    return material #+ mobility + center_control + table_value 
+    return material + center_control + mobility
