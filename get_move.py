@@ -27,14 +27,19 @@ def get_move(board, depth):
     for p in processes:
         p.join()
 
-    for move in board.legal_moves:
+    for p in range(len(processes)):
         move, score = q.get()
 
         if not board.turn:
             score *= -1
         
-        if score >= best_score:
+        if score > best_score:
             best_score = score
+            best_move = move
+
+        # this is so its deterministic
+        elif score == best_score and str(move) < str(best_move):
+            print("cum")
             best_move = move
 
     return best_move
