@@ -2,7 +2,6 @@ from get_move import get_move
 import chess
 import chess.pgn
 import timeit
-from minimax import transpositions_found
 
 def get_player_move(board):
     while True:
