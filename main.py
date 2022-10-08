@@ -16,12 +16,13 @@ def get_player_move(board):
 def game(depth):
     board = chess.Board()
 
-    board.set_board_fen("2r5/1Q6/1kp1n3/2N1P3/p4p2/3B4/PP4PP/2R1K2R")
+    #board.set_board_fen("2r5/1Q6/1kp1n3/2N1P3/p4p2/3B4/PP4PP/2R1K2R")
 
-    pgn = chess.pgn.Game()
+    pgn = chess.pgn.Game.from_board(board)
     node = pgn
 
     while not board.is_game_over():
+        # unsure if this is the best way to do this
         # transposition_table.clear()
 
         print(board)

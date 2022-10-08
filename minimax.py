@@ -3,12 +3,12 @@ from quiescence import quiescence
 from transposition_table import add_transposition, get_transposition
 
 def minimax(board, depth, alpha, beta):
-    # try:
-    #     transposition = get_transposition(board)
-    #     if transposition[1] <= depth:
-    #         return transposition[0]
-    # except:
-    #     pass
+    try:
+        transposition = get_transposition(board)
+        if transposition[1] <= depth:
+            return transposition[0]
+    except:
+        pass
 
     if board.is_game_over():
         return evaluate(board)
@@ -26,7 +26,7 @@ def minimax(board, depth, alpha, beta):
             alpha = max(alpha, eval)
             if beta <= alpha:
                 break
-        # add_transposition(board, max_eval, depth)
+        add_transposition(board, max_eval, depth)
         return max_eval
     else:
         min_eval = 9999
@@ -38,5 +38,5 @@ def minimax(board, depth, alpha, beta):
             beta = min(beta, eval)
             if beta <= alpha:
                 break
-        # add_transposition(board, min_eval, depth)
+        add_transposition(board, min_eval, depth)
         return min_eval
