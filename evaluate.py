@@ -80,6 +80,8 @@ kingstable = [
     -30, -40, -40, -50, -50, -40, -40, -30
 ]
 
+#have one empty index at the beginning so that the piece type can be used as an index directly
+piece_square_tables = [None, pawntable, knightstable, bishopstable, rookstable, queenstable, kingstable]
 
 def evaluate(board):
     # Checkmate/stalemate
@@ -97,35 +99,24 @@ def evaluate(board):
         material += value if piece.color else -value
 
     # Mobility
-    mobility = 0
-    mobility += len(list(board.legal_moves))
-    board.push(chess.Move.null())
-    mobility -= len(list(board.legal_moves))
-    board.pop()
+    # mobility = 0
+    # mobility += len(list(board.legal_moves))
+    # board.push(chess.Move.null())
+    # mobility -= len(list(board.legal_moves))
+    # board.pop()
 
     # Center control
-    center_control = 0
-    for square in center_squares:
-        if board.piece_at(square):
-            center_control += 10 if board.piece_at(square).color else -10
+    # center_control = 0
+    # for square in center_squares:
+    #     if board.piece_at(square):
+    #         center_control += 10 if board.piece_at(square).color else -10
 
     # Table Value
     # this is very slow
     table_value = 0
-    # for piece in board.piece_map():
-    #     white = board.piece_at(piece).color
-    #     if board.piece_at(piece).piece_type == chess.PAWN:
-    #         table_value += pawntable[piece] if white else -pawntable[chess.square_mirror(piece)]
-    #     elif board.piece_at(piece).piece_type == chess.KNIGHT:
-    #         table_value += knightstable[piece] if white else -knightstable[chess.square_mirror(piece)]
-    #     elif board.piece_at(piece).piece_type == chess.BISHOP:
-    #         table_value += bishopstable[piece] if white else -bishopstable[chess.square_mirror(piece)]
-    #     elif board.piece_at(piece).piece_type == chess.ROOK:
-    #         table_value += rookstable[piece] if white else -rookstable[chess.square_mirror(piece)]
-    #     elif board.piece_at(piece).piece_type == chess.QUEEN:
-    #         table_value += queenstable[piece] if white else -queenstable[chess.square_mirror(piece)]
-    #     elif board.piece_at(piece).piece_type == chess.KING:
-    #         table_value += kingstable[piece] if white else -kingstable[chess.square_mirror(piece)]
+    for piece in board.piece_map():
+        white = board.piece_at(piece).color
+        piece_type = board.piece_at(piece).piece_type
+        table_value += piece_square_tables[piece_type][piece] if white else -piece_square_tables[piece_type][piece]
 
-
-    return material + mobility + center_control + table_value 
+    return material + table_value 
