@@ -1,7 +1,17 @@
 from evaluate import evaluate
 from quiescence import quiescence
+import chess.polyglot
+
+transposition_table = {}
 
 def minimax(board, depth, alpha, beta):
+    hash = chess.polyglot.zobrist_hash(board)
+
+    if hash in transposition_table:
+        transposition = transposition_table[hash]
+        if transposition[1] >= depth:
+            return transposition[0]
+
     if board.is_game_over():
         return evaluate(board)
 
@@ -19,6 +29,8 @@ def minimax(board, depth, alpha, beta):
             if beta <= alpha:
                 break
 
+        transposition_table[hash] = (max_eval, depth)
+
         return max_eval
     else:
         min_eval = 9999
@@ -30,5 +42,7 @@ def minimax(board, depth, alpha, beta):
             beta = min(beta, eval)
             if beta <= alpha:
                 break
+
+        transposition_table[hash] = (min_eval, depth)
 
         return min_eval

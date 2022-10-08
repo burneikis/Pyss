@@ -39,4 +39,4 @@ def game(depth):
     print(pgn)
 
 if __name__ == '__main__':
-    print(timeit.timeit("game(4)", setup="from __main__ import game", number=1))
+    print(timeit.timeit("game(5)", setup="from __main__ import game", number=1))
