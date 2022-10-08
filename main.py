@@ -26,7 +26,7 @@ def game(depth):
         move = get_move(board, depth) #if board.turn else get_player_move(board)
 
         print(str(move))
-        print(transpositions_found)
+
         board.push(move)
         
         node = node.add_variation(move)
