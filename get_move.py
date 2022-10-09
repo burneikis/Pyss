@@ -1,7 +1,7 @@
 from minimax import minimax
 import multiprocess as mp
 
-def thread_function(board, depth, move, queue):
+def process_function(board, depth, move, queue):
     board.push(move)
     score = minimax(board, depth - 1, -9999, 9999)
     board.pop()
@@ -18,7 +18,7 @@ def get_move(board, depth):
     for move in board.legal_moves:
         board_copy = board.copy()
 
-        p = mp.Process(target=thread_function, args=(board_copy, depth, move, q))
+        p = mp.Process(target=process_function, args=(board_copy, depth, move, q))
         processes.append(p)
 
     for p in processes:
