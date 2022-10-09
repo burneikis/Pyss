@@ -1,18 +1,11 @@
 import chess
 #from piece_tables import piece_square_tables
 
-values = {
-    chess.PAWN: 100,
-    chess.KNIGHT: 320,
-    chess.BISHOP: 330,
-    chess.ROOK: 500,
-    chess.QUEEN: 900,
-    chess.KING: 20000
-}
+values = [ 0, 100, 320, 330, 500, 900, 20000 ]
 
 center_squares = [
-    chess.D5, chess.E5,
-    chess.D4, chess.E4
+    27, 28,
+    35, 36
 ]
 
 def evaluate(board):
@@ -32,9 +25,9 @@ def evaluate(board):
 
     # Mobility
     mobility = 0
-    mobility += len(list(board.legal_moves))
+    mobility += len(list(board.legal_moves)) if board.turn else -len(list(board.legal_moves))
     board.push(chess.Move.null())
-    mobility -= len(list(board.legal_moves))
+    mobility += len(list(board.legal_moves)) if board.turn else -len(list(board.legal_moves))
     board.pop()
 
     # Center control
