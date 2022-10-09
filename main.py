@@ -29,7 +29,6 @@ def game(depth):
         
         node = node.add_variation(move)
 
-        #print the last move from the pgn
         print(str(pgn).split()[-2])
 
     print(board)

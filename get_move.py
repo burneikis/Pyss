@@ -16,7 +16,6 @@ def get_move(board, depth):
             best_score = score
             best_move = move
 
-        # this is so its deterministic
         elif score == best_score and str(move) < str(best_move):
             best_move = move
 
