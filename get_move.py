@@ -1,34 +1,13 @@
 from minimax import minimax
-import multiprocess as mp
-
-def process_function(board, depth, move, queue):
-    board.push(move)
-    score = minimax(board, depth - 1, -9999, 9999)
-    board.pop()
-
-    queue.put((move, score))
 
 def get_move(board, depth):
     best_move = None
     best_score = float("-inf")
 
-    processes = []
-    q = mp.Queue()
-
     for move in board.legal_moves:
-        board_copy = board.copy()
-
-        p = mp.Process(target=process_function, args=(board_copy, depth, move, q))
-        processes.append(p)
-
-    for p in processes:
-        p.start()
-
-    for p in processes:
-        p.join()
-
-    for p in range(len(processes)):
-        move, score = q.get()
+        board.push(move)
+        score = minimax(board, depth - 1, float("-inf"), float("inf"))
+        board.pop()
 
         if not board.turn:
             score *= -1
