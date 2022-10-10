@@ -26,7 +26,7 @@ def game(depth):
 
         move = get_move(board, depth) #if board.turn else get_player_move(board)
         board.push(move)
-        
+
         node = node.add_variation(move)
 
         print(str(pgn).split()[-2])
@@ -38,4 +38,4 @@ def game(depth):
     print(pgn)
 
 if __name__ == '__main__':
-    print(timeit.timeit("game(0, 1)", setup="from __main__ import game", number=1))
+    print(timeit.timeit("game(4)", setup="from __main__ import game", number=1))
