@@ -3,7 +3,7 @@ import multiprocess as mp
 
 def process_function(board, move, depth, q):
     board.push(move)
-    score = minimax(board, depth, float("-inf"), float("inf"))
+    score = minimax(board, depth - 1, float("-inf"), float("inf"))
     q.put((move, score))
 
 def get_move(board, depth):

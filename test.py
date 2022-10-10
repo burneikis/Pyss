@@ -5,7 +5,7 @@ import pstats
 
 if __name__ == '__main__':
     with cProfile.Profile() as pr:
-        game(4)
+        game(2)
 
     stats = pstats.Stats(pr)
 

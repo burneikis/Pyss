@@ -23,9 +23,11 @@ def evaluate(board):
 
     # Mobility
     mobility = 0
-    mobility += len(list(board.legal_moves)) if board.turn else -len(list(board.legal_moves))
+    legal_moves = len(list(board.legal_moves))
+    mobility += legal_moves if board.turn else -legal_moves
     board.push(chess.Move.null())
-    mobility += len(list(board.legal_moves)) if board.turn else -len(list(board.legal_moves))
+    legal_moves = len(list(board.legal_moves))
+    mobility += legal_moves if board.turn else -legal_moves
     board.pop()
 
     # Center control
