@@ -7,7 +7,7 @@ def get_move(board, depth, parallel_depth):
 
     for move in board.legal_moves:
         board.push(move)
-        score = parallel_search(board, parallel_depth, depth - 1)
+        score = parallel_search(board, parallel_depth, depth)
         board.pop()
 
         if not board.turn:
