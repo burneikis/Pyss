@@ -16,7 +16,7 @@ def minimax(board, depth, alpha, beta):
         return evaluate(board)
 
     if depth == 0:
-        return quiescence(board, alpha, beta, board.turn)
+        return quiescence(board, alpha, beta)
 
     if board.turn:
         max_eval = -9999
@@ -32,17 +32,15 @@ def minimax(board, depth, alpha, beta):
         transposition_table[hash] = (max_eval, depth)
 
         return max_eval
-    else:
-        min_eval = 9999
-        for move in board.legal_moves:
-            board.push(move)
-            eval = minimax(board, depth - 1, alpha, beta)
-            board.pop()
-            min_eval = min(min_eval, eval)
-            beta = min(beta, eval)
-            if beta <= alpha:
-                break
-
-        transposition_table[hash] = (min_eval, depth)
-
-        return min_eval
+    
+    min_eval = 9999
+    for move in board.legal_moves:
+        board.push(move)
+        eval = minimax(board, depth - 1, alpha, beta)
+        board.pop()
+        min_eval = min(min_eval, eval)
+        beta = min(beta, eval)
+        if beta <= alpha:
+            break
+    transposition_table[hash] = (min_eval, depth)
+    return min_eval
