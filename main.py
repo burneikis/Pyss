@@ -25,9 +25,9 @@ def game(depth):
         print("White to move" if board.turn else "Black to move")
 
         move = get_move(board, depth) #if not board.turn else get_player_move(board)
-        board.push(move)
+        board.push(move) # type: ignore
 
-        node = node.add_variation(move)
+        node = node.add_variation(move) # type: ignore
 
         print(str(pgn).split()[-2])
 

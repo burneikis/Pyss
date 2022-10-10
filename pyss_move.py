@@ -11,12 +11,12 @@ def get_move(board, depth):
     best_score = float("-inf")
 
     processes = []
-    q = mp.Queue()
+    q = mp.Queue()  # type: ignore
 
     for move in board.legal_moves:
         board_copy = board.copy()
 
-        p = mp.Process(target=process_function, args=(board_copy, move, depth, q))
+        p = mp.Process(target=process_function, args=(board_copy, move, depth, q))  # type: ignore
         processes.append(p)
 
     for p in processes:
