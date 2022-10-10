@@ -1,9 +1,9 @@
 from minimax import minimax
-from parallel_search import parallel_search
 import multiprocess as mp
 
-def process_function(board, pdepth, mdepth, q, move):
-    score = parallel_search(board, pdepth, mdepth)
+def process_function(board, move, depth, q):
+    board.push(move)
+    score = minimax(board, depth, float("-inf"), float("inf"))
     q.put((move, score))
 
 def get_move(board, depth, parallel_depth):
@@ -15,9 +15,8 @@ def get_move(board, depth, parallel_depth):
 
     for move in board.legal_moves:
         board_copy = board.copy()
-        board_copy.push(move)
 
-        p = mp.Process(target=process_function, args=(board_copy, parallel_depth, depth, q, move))
+        p = mp.Process(target=process_function, args=(board_copy, move, depth, q))
         processes.append(p)
 
     for p in processes:
