@@ -6,7 +6,7 @@ def process_function(board, move, depth, q):
     score = minimax(board, depth, float("-inf"), float("inf"))
     q.put((move, score))
 
-def get_move(board, depth, parallel_depth):
+def get_move(board, depth):
     best_move = None
     best_score = float("-inf")
 
