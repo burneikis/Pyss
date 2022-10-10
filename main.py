@@ -1,4 +1,4 @@
-from get_move import get_move
+from pyss_move import get_move
 import chess
 import chess.pgn
 import timeit
@@ -24,7 +24,7 @@ def game(depth):
         print(board)
         print("White to move" if board.turn else "Black to move")
 
-        move = get_move(board, depth) #if board.turn else get_player_move(board)
+        move = get_move(board, depth) #if not board.turn else get_player_move(board)
         board.push(move)
 
         node = node.add_variation(move)

@@ -1,4 +1,4 @@
-from evaluate import evaluate
+from pyss_evaluation import evaluate
 
 def quiescence(board, alpha, beta): 
     captures = [i for i in board.legal_moves if board.is_capture(i)]

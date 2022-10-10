@@ -1,5 +1,5 @@
-from evaluate import evaluate
-from quiescence import quiescence
+from pyss_evaluation import evaluate
+from pyss_quiescence import quiescence
 import chess.polyglot
 
 transposition_table = {}

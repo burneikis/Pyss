@@ -1,4 +1,4 @@
-from minimax import minimax
+from pyss_minimax import minimax
 import multiprocess as mp
 
 def process_function(board, move, depth, q):

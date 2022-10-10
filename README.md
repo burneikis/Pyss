@@ -1,4 +1,4 @@
-# Python Chess AI
+# Pyss - (Py(thon Che)ss)
 A Simple AI for chess written in python.
 
 ## Thoughts
