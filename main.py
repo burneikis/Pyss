@@ -12,7 +12,7 @@ def get_player_move(board):
         except:
             print("Invalid move")
 
-def game(depth):
+def game(depth, parallel_depth):
     board = chess.Board()
 
     board.set_board_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
@@ -24,7 +24,7 @@ def game(depth):
         print(board)
         print("White to move" if board.turn else "Black to move")
 
-        move = get_move(board, depth) #if board.turn else get_player_move(board)
+        move = get_move(board, depth, parallel_depth) #if board.turn else get_player_move(board)
         board.push(move)
         
         node = node.add_variation(move)
@@ -38,4 +38,4 @@ def game(depth):
     print(pgn)
 
 if __name__ == '__main__':
-    print(timeit.timeit("game(2)", setup="from __main__ import game", number=1))
+    print(timeit.timeit("game(1, 1)", setup="from __main__ import game", number=1))

@@ -1,13 +1,13 @@
 from minimax import minimax
 from parallel_search import parallel_search
 
-def get_move(board, depth):
+def get_move(board, depth, parallel_depth):
     best_move = None
     best_score = float("-inf")
 
     for move in board.legal_moves:
         board.push(move)
-        score = parallel_search(board, 1, depth - 1)
+        score = parallel_search(board, parallel_depth, depth - 1)
         board.pop()
 
         if not board.turn:
