@@ -1,7 +1,6 @@
 from pyss_move import get_move
 import chess
 import chess.pgn
-import timeit
 
 def get_player_move(board):
     while True:
@@ -38,4 +37,4 @@ def game(depth):
     print(pgn)
 
 if __name__ == '__main__':
-    print(timeit.timeit("game(4)", setup="from __main__ import game", number=1))
+    game(2)

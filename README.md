@@ -2,7 +2,7 @@
 A Simple AI for chess written in python.
 
 ## What this code does exactly
-The code runs (and times itself) a chess game retrieving moves for both white and black from pyss given one argument indicating depth
+The code runs a chess game retrieving moves for both white and black from pyss given one argument indicating depth
 The code can be modified to allow a human to input moves as well
 It prints: the board, the last move, and the current turn
 
