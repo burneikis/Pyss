@@ -1,6 +1,6 @@
 from pyss_evaluation import evaluate
 
-def quiescence(board, alpha, beta): 
+def quiescence(board, alpha, beta):
     captures = [i for i in board.legal_moves if board.is_capture(i)]
 
     stand_pat = evaluate(board)
