@@ -14,7 +14,7 @@ def get_player_move(board):
         except ValueError:
             print("Invalid move")
 
-def game(depth, white, black):
+def game(depth, white, black, fen, turn):
     """
     main game loop
     depth is the depth of the search tree
@@ -24,8 +24,11 @@ def game(depth, white, black):
     # create a new board
     board = chess.Board()
 
-    # setup the board (by default it is already set up, but you can start from a different position)
-    board.set_board_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
+    # setup the board
+    board.set_board_fen(fen)
+
+    # set the turn
+    board.turn = turn
 
     # start a new pgn from the current board
     # (specifically .from_board so that the pgn will start from the current position)

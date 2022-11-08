@@ -1,7 +1,7 @@
 """choose a move to play"""
 
 # multiprocess is faster than multiprocessing (idk why, im probably doing something wrong)
-import multiprocess as mp
+import multiprocess as mp # pylint: disable=import-error
 from pyss_minimax import minimax
 
 def process_function(board, move, depth, queue):
