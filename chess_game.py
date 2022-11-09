@@ -15,7 +15,7 @@ def get_player_move(board):
         except ValueError:
             print("Invalid move")
 
-def game(depth, white, black, fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", turn = True, max_time=60):
+def game(depth, white, black, fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", turn = True, max_time=float("inf")):
     """
     main game loop
     depth is the depth of the search tree
