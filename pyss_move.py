@@ -1,5 +1,6 @@
 """choose a move to play"""
 
+import time
 # multiprocess is faster than multiprocessing (idk why, im probably doing something wrong)
 import multiprocess as mp # pylint: disable=import-error
 from pyss_minimax import minimax
@@ -10,8 +11,11 @@ def process_function(board, move, depth, queue):
     score = minimax(board, depth - 1, float("-inf"), float("inf"))
     queue.put((move, score))
 
-def get_move(board, depth):
+def get_move(board, depth, max_time):
     """get the highest scoring move by running an evaluation on all legal moves"""
+
+    # start timer
+    start_time = time.time()
 
     # set default worst moves
     best_move = None
@@ -37,6 +41,12 @@ def get_move(board, depth):
 
     # wait for all processes to finish
     for process in processes:
+        # if the time limit has been reached, kill all processes
+        if time.time() - start_time > max_time:
+            for process in processes:
+                process.terminate()
+            print("Max Time Reached")
+            break
         process.join()
 
     # get the best move from the queue
