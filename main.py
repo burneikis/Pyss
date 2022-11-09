@@ -3,4 +3,4 @@
 from chess_game import game
 
 if __name__ == '__main__':
-    game(4, False, False, max_time=60)
+    game(4, False, False, max_time=30)

@@ -23,7 +23,7 @@ def get_move(board, depth, max_time):
 
     # create an array and queue for processes
     processes = []
-    queue = mp.Queue()
+    queue = mp.Queue() # pylint: disable=no-member
 
     # iterate through all legal moves
     for move in board.legal_moves:
@@ -32,7 +32,7 @@ def get_move(board, depth, max_time):
         board_copy = board.copy()
 
         # create a process for each move
-        process = mp.Process(target=process_function, args=(board_copy, move, depth, queue))
+        process = mp.Process(target=process_function, args=(board_copy, move, depth, queue)) # pylint: disable=not-callable
         processes.append(process)
 
     # start all processes

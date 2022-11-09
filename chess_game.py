@@ -1,5 +1,6 @@
 """chess game"""
 
+import time
 import chess
 import chess.pgn
 from pyss_move import get_move
@@ -37,6 +38,9 @@ def game(depth, white, black, fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
     pgn = chess.pgn.Game.from_board(board)
     node = pgn
 
+    # Start time for the game
+    start_time = time.time()
+
     # loop until the game is over
     while not board.is_game_over():
 
@@ -61,9 +65,13 @@ def game(depth, white, black, fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
         # print the last move from the pgn (the move we just made)
         print(str(pgn).split()[-2])
 
+    # end time
+    end_time = time.time()
+
     # when the game is over, print the board and the entire pgn
     print(board)
     pgn.headers["White"] = "Player" if white else "Computer"
     pgn.headers["Black"] = "Player" if black else "Computer"
     pgn.headers["Result"] = board.result()
     print(pgn)
+    print("Time taken: " + str(end_time - start_time))
